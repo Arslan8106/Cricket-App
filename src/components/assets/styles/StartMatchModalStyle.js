@@ -1,37 +1,71 @@
-
 import colors from "../colors/colors";
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    successModalContainer: {
+    startMatchModalContainer: {
         flex: 1,
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
-    successModalContent: {
-        width: "80%",
-        height: "65%",
-        backgroundColor: "white",
-        padding: 20,
-        borderRadius: 10,
-    },
     mainInnerWrapper: {
-        alignItems: "center",
+        flexDirection: "column",
         opacity: 1,
+        alignItems: "center"
     },
-    congrulationsBookingText: {
-        paddingVertical: '5%',
+    setupMatchWrapper: {
+        paddingVertical: '1%',
         textAlign: "center",
         fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         fontSize: 21,
         color: colors.midLightBlack,
         opacity: 1,
     },
+    selectPlayerLabel: {
+        fontFamily: "Poppins-Regular",
+        fontSize: 14,
+        paddingBottom: 5,
+        color: colors.black,
+        textAlign: "center"
+    },
+    battingTeamSelectionWrapper: {
+        flexDirection: "column",
+        justifyContent: "center"
+    },
+    dropdown: {
+        width: "65%",
+        height: 50,
+        borderBottomColor: 'gray',
+        borderBottomWidth: 0.5,
+        marginVertical: '2%'
+    },
+    icon: {
+        marginRight: 5,
+        color: colors.white,
+    },
+    placeholderStyle: {
+        fontSize: 16,
+        color: colors.black
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+        color: colors.black
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
+
     bookingSuccessfulText: {
         textAlign: "center",
-        fontFamily: "Poppins-Normal",
+        fontFamily: "Poppins-Medium",
+        fontWeight: "normal",
         fontSize: 14,
         color: colors.midLightBlack,
         opacity: 1,
@@ -70,3 +104,5 @@ export default StyleSheet.create({
         alignItems: "center",
     }
 });
+
+

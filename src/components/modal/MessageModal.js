@@ -82,10 +82,11 @@ const MessageModal = (props) => {
                             />
                             <TextInput
                                 style={styles.input}
+                                multiline
+                                numberOfLines={4}
                                 placeholder="Enter message"
                                 value={email}
                                 onChangeText={(email) => setEmail(email)}
-                                multiline={true}
                             />
                             <TouchableOpacity onPress={sendMessage}>
                                 <View style={styles.sendWhatsappMessageWrapper}>

@@ -35,7 +35,6 @@ const MatchesScreen = (props) => {
                 setMatchesData(response.data.matchesData);
                 setFetchTeams(response.data.teams_data);
                 setIsLoad(true);
-                console.log('Data fetched successfully:', response.data.teams_data);
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message
@@ -60,7 +59,7 @@ const MatchesScreen = (props) => {
             }>
                 {isLoad && (
                 <View style={styles.mainWrapper}>
-                    {matchesData.map(item => (
+                    {matchesData && matchesData.map(item => (
                         <UpcomingMatchesBanner
                             item={item}
                             key={item.id}

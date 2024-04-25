@@ -62,7 +62,7 @@ export default StyleSheet.create({
     },
     bottomBarText: {
         paddingRight: '2%',
-        textAlign:"right",
+        textAlign: "right",
         fontFamily: "Poppins-Light",
         fontSize: 14,
         fontWeight: "500",

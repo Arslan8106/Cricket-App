@@ -1,9 +1,18 @@
-import { Text, View} from "react-native";
-import React from "react";
+import {Pressable, Text, View} from "react-native";
+import React, {useState} from "react";
 import styles from "../../components/assets/styles/UpcomingMatchesBannerStyle";
+import _ from "lodash";
+import StartMatchModal from "../modal/StartMatchModal";
 
 const UpcomingMatchesBanner = ({item,team1, team2}, props) => {
-    console.log(item.match_date)
+
+    const [updateModalVisible, setUpdateModalVisible] = useState(false);
+    const [activeMatch, setActiveMatch] = useState(null);
+    let numberOfDays = 0;
+    const startMatch = (match) => {
+        setActiveMatch(match);
+        setUpdateModalVisible(true);
+    };
     const fetchCurrentTime = (timestampString) => {
         const timestamp = new Date(timestampString);
         const hours = timestamp.getUTCHours();
@@ -20,6 +29,9 @@ const UpcomingMatchesBanner = ({item,team1, team2}, props) => {
     };
     return (
         < View style={{flexDirection: "column"}}>
+            <Pressable onPress={() => {
+                !_.isEmpty(item) ? startMatch(item) : ''
+            }}>
             <View style={[styles.discountItemWrapper]}>
                 <View style={styles.mainCardWrapper}>
                     <Text style={styles.mainMatchHeading}>
@@ -45,6 +57,10 @@ const UpcomingMatchesBanner = ({item,team1, team2}, props) => {
             <View style={styles.bottomBar}>
                 <Text style={styles.bottomBarText}>Matches</Text>
             </View>
+            </Pressable>
+            {activeMatch &&
+                <StartMatchModal setActiveMatch={setActiveMatch} activeMatch={activeMatch} team1={team1.name} team2={team2.name} overs={item.overs} matchDetails={item}/>
+            }
         </View>
     );
 };

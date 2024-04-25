@@ -48,26 +48,58 @@ const HomeScreen = (props) => {
                         </TouchableOpacity>
                     }
                 />
-                <Text style={styles.newsHeading}>News</Text>
-                <View style={{flexDirection: "row"}}>
-                    <View style={styles.signOutWrapper}>
-                <Text onPress={() => props.logout()} style={styles.createTeamText}>Sign out</Text>
+                <View
+                    style={{
+                        borderBottomColor: colors.lightGrey,
+                        borderBottomWidth: StyleSheet.hairlineWidth,
+                        paddingTop: "5%",
+                        marginBottom: "2%",
+                    }}
+                />
+                <Text style={styles.newsHeading}>News </Text>
+                <View style={styles.newsWrapper}>
+                    <Text style={styles.newsTextHeading}>Rules for creating matches</Text>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.text}>First of all sports coordinator will create team.</Text>
                     </View>
-                <TouchableOpacity onPress={handlePress}>
-                    <View style={styles.createTeamWrapper}>
-                        <MaterialCommunityIcons name="plus" size={30} color={colors.primary}/>
-                        <Text style={styles.createTeamText}>Create Team</Text>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.secondText}>After creation of team, captain will add players.</Text>
+                    </View>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.secondText}>Captain will send any message to players.</Text>
+                    </View>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.secondText}>Admin can create matches based on available teams.</Text>
+                    </View>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.secondText}>Overs selection and teams selection shouldn't be fixed.</Text>
+                    </View>
+                    <View style={styles.newsContainer}>
+                        <View style={styles.bullet}/>
+                        <Text style={styles.secondText}>Admin can set as many overs as he can in match.</Text>
+                    </View>
+                    {/*<View style={styles.signOutWrapper}>*/}
+                    {/*    <Text onPress={() => props.logout()} style={styles.createTeamText}>Sign out</Text>*/}
+                    {/*</View>*/}
+                    {/*<TouchableOpacity onPress={handlePress}>*/}
+                    {/*    <View style={styles.createTeamWrapper}>*/}
+                    {/*        <MaterialCommunityIcons name="plus" size={30} color={colors.primary}/>*/}
+                    {/*        <Text style={styles.createTeamText}>Create Team</Text>*/}
+                    {/*    </View>*/}
+                    {/*</TouchableOpacity>*/}
+                </View>
+                <TouchableOpacity onPress={openMessageModal}>
+                    <View style={styles.sendWhatsappMessageWrapper}>
+                        <MaterialCommunityIcons name="email" size={35} color={colors.white}/>
+                        <Text style={styles.sendMessageButtonText}>Send Message</Text>
                     </View>
                 </TouchableOpacity>
-                </View>
             </View>
-
-            <TouchableOpacity onPress={openMessageModal}>
-                <View style={styles.sendWhatsappMessageWrapper}>
-                    <MaterialCommunityIcons name="email" size={35} color={colors.white}/>
-                    <Text style={styles.sendMessageButtonText}>Send Message</Text>
-                </View>
-            </TouchableOpacity>
             {isPressed &&
                 <MessageModal isPressed={isPressed} setIsPressed={setIsPressed}/>
             }

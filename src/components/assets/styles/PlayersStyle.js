@@ -39,7 +39,7 @@ export default StyleSheet.create({
         fontWeight: "bold",
         fontFamily: "Poppins-Bold",
         alignItems: "center",
-        textTransform: "uppercase",
+        textTransform: "capitalize",
     },
     departmentNameText: {
         color: colors.white,

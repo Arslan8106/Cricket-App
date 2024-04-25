@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
-    Button,
+    Button, RefreshControl,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -28,6 +28,7 @@ const CreateTeam = (props) => {
     const [players, setPlayers] = useState('')
     const [isLoad, setIsLoad] = useState(false)
     const [isNotLoad, setIsNotLoad] = useState(false)
+    const [refreshing, setRefreshing] = useState(false);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
 
     useEffect(() => {
@@ -60,13 +61,17 @@ const CreateTeam = (props) => {
             text1: (err.response && err.response.data.error) || err.message
         }));
     };
+    const onRefresh = () => {
+        fetchTeam()
+    }
 
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar/>
             <Header title={"Team"}/>
-            <ScrollView
-                contentInsetAdjustmentBehavior="automatic">
+            <ScrollView contentInsetAdjustmentBehavior={"automatic"} refreshControl={
+                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }>
                 <View style={styles.mainWrapper}>
                     {isNotLoad && _.isEmpty(team) && (
                         <View>

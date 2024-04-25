@@ -32,7 +32,7 @@ const CreateMatchModal = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-    const [modalHeight, setModalHeight] = useState(590);
+    const [modalHeight, setModalHeight] = useState(610);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
 
     useEffect(() => {
@@ -47,7 +47,7 @@ const CreateMatchModal = (props) => {
 
         const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
             setIsKeyboardOpen(false);
-            setModalHeight(590);
+            setModalHeight(610);
         });
 
         return () => {
@@ -88,7 +88,6 @@ const CreateMatchModal = (props) => {
                 setTeam1('')
                 setTeam2('')
                 props.setCreateMatchModalVisible(false);
-                props.setIsPressed(false)
                 console.log('Data saved successfully:', response.data.team);
             }).catch(err => Toast.show({
             type: "error",
@@ -117,7 +116,6 @@ const CreateMatchModal = (props) => {
     };
 
     const handleTimeConfirm = (time) => {
-        console.warn("A date has been picked: ", time);
         setTime(time.toLocaleTimeString())
         hideTimePicker();
     };

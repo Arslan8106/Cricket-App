@@ -10,6 +10,7 @@ let customFonts = {
     'Poppins-Light': require('../cricket-app/src/components/assets/fonts/Poppins-Light.ttf'),
     'Poppins-Bold': require('../cricket-app/src/components/assets/fonts/Poppins-Bold.ttf'),
     'Poppins-SemiBold': require('../cricket-app/src/components/assets/fonts/Poppins-SemiBold.ttf'),
+    'Poppins-Regular': require('../cricket-app/src/components/assets/fonts/Poppins-Regular.ttf'),
 };
 export default function App() {
     const [isLoaded] = useFonts(customFonts);

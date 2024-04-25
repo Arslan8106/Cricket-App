@@ -19,6 +19,13 @@ export default StyleSheet.create({
         color: colors.black,
         marginVertical: "3%"
     },
+    createPlayerWrapper: {
+        borderRadius: 10,
+        backgroundColor: colors.white,
+        paddingHorizontal: "4%",
+        paddingVertical: "4%",
+        marginBottom: '4%'
+    },
     label: {
         fontFamily: "Poppins-Medium",
         fontSize: 18,
@@ -31,7 +38,7 @@ export default StyleSheet.create({
         borderColor: colors.black,
         borderWidth: 1,
         borderRadius: 5,
-        marginBottom: 15,
+        marginBottom: "3%",
         paddingHorizontal: 10,
     },
 
@@ -90,5 +97,31 @@ export default StyleSheet.create({
         justifyContent: "space-between",
         borderRadius: 12,
         marginVertical: '2%'
-    }
+    },
+    dropdown: {
+        width: "100%",
+        height: 50,
+        borderBottomColor: colors.black,
+        borderBottomWidth: 0.5,
+    },
+    icon: {
+        marginRight: 5,
+        color: colors.black,
+    },
+    placeholderStyle: {
+        fontSize: 17,
+        color: colors.black
+    },
+    selectedTextStyle: {
+        fontSize: 16,
+        color: colors.black
+    },
+    iconStyle: {
+        width: 20,
+        height: 20,
+    },
+    inputSearchStyle: {
+        height: 40,
+        fontSize: 16,
+    },
 })

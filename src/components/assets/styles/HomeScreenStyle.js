@@ -16,18 +16,58 @@ export default StyleSheet.create({
         marginVertical: "3%"
     },
     mainWrapper: {
-        paddingVertical: "2%",
         paddingHorizontal: "4%"
     },
     newsHeading: {
         textAlign: "left",
         fontFamily: "Poppins-Medium",
         fontWeight: "700",
-        fontSize: 30,
+        fontSize: 27,
         letterSpacing: 0,
         color: colors.black,
         paddingHorizontal: '1%',
-        marginVertical: "3%"
+        marginVertical: "3%",
+        textTransform:"uppercase"
+    },
+    newsTextHeading: {
+        textAlign: "center",
+        fontFamily: "Poppins-Medium",
+        fontWeight: "700",
+        fontSize: 20,
+        letterSpacing: 0,
+        color: colors.black,
+        paddingHorizontal: '1%',
+        marginVertical: "3%",
+        textTransform: "capitalize"
+    },
+    newsContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 8,
+    },
+    newsWrapper: {
+        paddingVertical: "2%",
+        paddingHorizontal: "2%",
+        flexDirection: "column",
+        backgroundColor: colors.white
+    },
+    bullet: {
+        width: 8,
+        height: 8,
+        borderRadius: 4,
+        backgroundColor: 'black',
+        marginRight: 8,
+    },
+    secondText: {
+        paddingTop: '1.5%',
+        color: colors.black,
+        fontSize: 14,
+        fontFamily: "Poppins-Light",
+    },
+    text: {
+        color: colors.black,
+        fontSize: 14,
+        fontFamily: "Poppins-Light",
     },
     createTeamWrapper: {
         borderRadius: 50,
@@ -39,12 +79,14 @@ export default StyleSheet.create({
         marginRight: "14%",
     },
     sendWhatsappMessageWrapper: {
+        alignSelf: "flex-end",
+        marginTop: "4%",
         borderRadius: 50,
         backgroundColor: colors.primary,
         padding: 10,
-        width: '40%',
+        width: '46%',
         flexDirection: "row",
-        alignItems: "center",
+        alignItems: "center"
     },
     signOutWrapper: {
         borderRadius: 50,

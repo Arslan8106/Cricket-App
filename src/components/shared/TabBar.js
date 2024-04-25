@@ -5,10 +5,10 @@ import colors from "../assets/colors/colors";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 
 import HomeScreen from "../screens/home/HomeScreen";
-import MatchesScreen from "../screens/matches/MatchesScreen";
 import CreatePlayers from "../screens/teams/CreatePlayers";
 import CreateTeam from "../screens/teams/CreateTeam";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import MatchesScreenStack from "../screens/matches/MatchesScreenStack";
 
 const Tab = createBottomTabNavigator();
 
@@ -20,9 +20,9 @@ const TabBar = ({ navigation, route }) => {
       case "HomeScreen":
         setCheckActive("");
         return "HomeScreen";
-     case "MatchesScreen":
+     case "MatchesScreenStack":
        setCheckActive("");
-       return "MatchesScreen";
+       return "MatchesScreenStack";
       case "CreateTeam":
         setCheckActive("");
         return "CreateTeam";
@@ -39,6 +39,7 @@ const TabBar = ({ navigation, route }) => {
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   }, [navigation, route]);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -69,7 +70,7 @@ const TabBar = ({ navigation, route }) => {
         unmountOnBlur: true,
       }}
       />
-      <Tab.Screen name="MatchesScreen" component={MatchesScreen} options={{
+      <Tab.Screen name="MatchesScreenStack" component={MatchesScreenStack} options={{
         headerShown: false,
         tabBarLabel: "",
         tabBarIcon: ({ color, size }) => (

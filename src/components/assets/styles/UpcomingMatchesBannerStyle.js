@@ -13,7 +13,7 @@ export default StyleSheet.create({
         width: 380,
         height: 160,
         backgroundColor: colors.white,
-        paddingVertical: "3%",
+        paddingVertical: "1%",
         borderTopStartRadius: 8,
         borderTopEndRadius: 8,
         borderWidth: 1,

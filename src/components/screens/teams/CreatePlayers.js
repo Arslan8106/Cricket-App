@@ -18,15 +18,18 @@ import {connect} from "react-redux";
 import Toast from "react-native-toast-message";
 import colors from "../../assets/colors/colors";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import {Dropdown} from "react-native-element-dropdown";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 const CreatePlayers = (props) => {
-    const [players, setPlayers] = useState([{name: '', contact_number: '', email: ''}]);
+    const [players, setPlayers] = useState([{name: '', age: '', email: '', player_type: ''}]);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
 
     const handleChange = (index, field, value) => {
         const updatedPlayers = [...players];
         updatedPlayers[index][field] = value;
         setPlayers(updatedPlayers);
+
     };
     const handleToggleField = (index) => {
         const updatedPlayers = [...players];
@@ -41,20 +44,24 @@ const CreatePlayers = (props) => {
     };
 
     const handleAddPlayer = () => {
-        setPlayers([...players, {name: '', contact_number: '', email: ''}]);
+        setPlayers([...players, {name: '', age: '', email: '', player_type: ''}]);
     };
 
     const handleSave = () => {
         axios.post(`${API_BASE_URL}/create_players`, {players: players, user: props.user["user"]})
             .then(response => {
                 Toast.show({type: "success", text1: "Players added Successfully"})
-                console.log('Data saved successfully:', response.data);
                 setPlayers([''])
             })
             .catch(error => {
                 console.error('Error saving data:', error);
             });
     };
+    const data = [
+        { label: 'Batsman', value: 'Batsman' },
+        { label: 'Bowler', value: 'Bowler' },
+        { label: 'AllRounder', value: 'AllRounder' },
+    ];
 
     return (
         <SafeAreaView style={styles.container}>
@@ -65,7 +72,7 @@ const CreatePlayers = (props) => {
                 <View style={styles.mainWrapper}>
                     <Text style={styles.mainHeading}>Create Player</Text>
                     {players.map((player, index) => (
-                        <View key={index}>
+                        <View key={index} style={styles.createPlayerWrapper}>
                             {!player.isHidden && (
                                 <>
                                     <TouchableOpacity onPress={() => handleRemovePlayer(index)} style={styles.closeIcon}>
@@ -79,21 +86,36 @@ const CreatePlayers = (props) => {
                                         value={player.name}
                                         onChangeText={(text) => handleChange(index, 'name', text)}
                                     />
-                                    <Text style={styles.label}>Contact Number:</Text>
                                     <TextInput
                                         style={styles.input}
-                                        placeholder="Enter Contact Number"
-                                        value={player.contact_number}
-                                        onChangeText={(text) => handleChange(index, 'contact_number', text)}
+                                        placeholder="Enter Age"
+                                        value={player.age}
+                                        onChangeText={(text) => handleChange(index, 'age', text)}
                                         keyboardType="phone-pad"
                                     />
-                                    <Text style={styles.label}>Email:</Text>
                                     <TextInput
                                         style={styles.input}
                                         placeholder="Enter Email"
                                         value={player.email}
                                         onChangeText={(text) => handleChange(index, 'email', text)}
                                         keyboardType="email-address"
+                                    />
+                                    <Dropdown
+                                        style={styles.dropdown}
+                                        placeholderStyle={styles.placeholderStyle}
+                                        selectedTextStyle={styles.selectedTextStyle}
+                                        inputSearchStyle={styles.inputSearchStyle}
+                                        iconStyle={styles.iconStyle}
+                                        data={data}
+                                        maxHeight={300}
+                                        labelField="label"
+                                        valueField="value"
+                                        placeholder="Select Player Type"
+                                        value={player.player_type}
+                                        onChange={(text) => handleChange(index, 'player_type', text.value)}
+                                        renderLeftIcon={() => (
+                                            <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+                                        )}
                                     />
                                 </>
                             )}
