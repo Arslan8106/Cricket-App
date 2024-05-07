@@ -199,7 +199,7 @@ const StartMatchScreen = (props) => {
             if (!startSecondInnings && !finishFirstInnings) {
                 finishInning()
             }
-            if (startSecondInnings && finishFirstInnings) {
+            if (startSecondInnings && finishFirstInnings && !finishSecondInnings) {
                 setFinishSecondInnings(true);
                 finishInning()
             }
