@@ -4,7 +4,6 @@ import colors from "../colors/colors";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: colors.lightWhite,
     },
     mainWrapper: {
         paddingVertical: "2%",
@@ -21,7 +20,6 @@ export default StyleSheet.create({
     },
     createPlayerWrapper: {
         borderRadius: 10,
-        backgroundColor: colors.white,
         paddingHorizontal: "4%",
         paddingVertical: "4%",
         marginBottom: '4%'
@@ -40,6 +38,15 @@ export default StyleSheet.create({
         borderRadius: 5,
         marginBottom: "3%",
         paddingHorizontal: 10,
+    },
+    captainInput: {
+        height: 45,
+        borderColor: colors.black,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginBottom: "3%",
+        paddingHorizontal: 10,
+        textTransform: "capitalize"
     },
 
     closeIcon: {

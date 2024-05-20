@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import {
-    Button, RefreshControl,
+    RefreshControl,
     SafeAreaView,
     ScrollView,
     StatusBar,
@@ -19,11 +19,13 @@ import {connect} from "react-redux";
 import _ from "lodash";
 import colors from "../../assets/colors/colors";
 import Players from "./Players";
+import CreatePlayers from "./CreatePlayers";
 
 
 const CreateTeam = (props) => {
+    const captain = props.user["user"]["user"]["user"]["username"]
     const [teamName, setTeamName] = useState('')
-    const [captainName, setCaptainName] = useState('')
+    const [captainName, setCaptainName] = useState(captain)
     const [team, setTeam] = useState('')
     const [players, setPlayers] = useState('')
     const [isLoad, setIsLoad] = useState(false)
@@ -41,6 +43,7 @@ const CreateTeam = (props) => {
             setTeam(response.data.team)
             setPlayers(response.data.players)
             setIsLoad(true)
+            setIsNotLoad(true);
         }).catch(error => {
             setTeam('');
             setIsNotLoad(true);
@@ -61,9 +64,13 @@ const CreateTeam = (props) => {
             text1: (err.response && err.response.data.error) || err.message
         }));
     };
+
     const onRefresh = () => {
         fetchTeam()
     }
+    useEffect(() => {
+        fetchTeam()
+    }, [isLoad]);
 
     return (
         <SafeAreaView style={styles.container}>
@@ -86,10 +93,9 @@ const CreateTeam = (props) => {
                                 />
                                 <Text style={styles.label}>Captain Name:</Text>
                                 <TextInput
-                                    style={styles.input}
+                                    style={styles.captainInput}
                                     placeholder="Enter Captain Name"
-                                    value={captainName}
-                                    onChangeText={(captainName) => setCaptainName(captainName)}
+                                    value={captain}
                                 />
                             </View>
                             <TouchableOpacity onPress={handleSave}>
@@ -97,7 +103,8 @@ const CreateTeam = (props) => {
                             </TouchableOpacity>
                         </View>
                     )}
-                    {isLoad && !isNotLoad && !_.isEmpty(team) && (
+                    {console.log("tttt",isNotLoad)}
+                    {isLoad && isNotLoad && !_.isEmpty(team) && (
                         <>
                             <Text style={styles.mainHeading}>Your Team</Text>
 

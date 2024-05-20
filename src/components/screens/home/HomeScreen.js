@@ -30,6 +30,7 @@ const HomeScreen = (props) => {
     const [teamTwoData , setTeamTwoData] = useState(null)
     const [teamOneStats , setTeamOneStats] = useState(null)
     const [teamTwoStats , setTeamTwoStats] = useState(null)
+    const user = props.user["user"]["user"]["user"]["role"] === "admin"
     const loadCompletedMatches = () => {
         axios.get(`${API_BASE_URL}/matches`)
             .then(response => {
@@ -52,15 +53,16 @@ const HomeScreen = (props) => {
     const handlePress = () => {
         props.navigation.navigate("CreateTeam")
     };
-    console.log('t1',teamOneStats)
-    console.log('t2',teamTwoStats)
+    console.log()
+
+
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar/>
             <Header title={"Home"}/>
             <View style={styles.mainWrapper}>
                 <Text style={styles.mainHeading}>Matches</Text>
-                {completedMatchesData && teamTwoData && teamTwoData && teamOneStats && teamTwoStats && (
+                {completedMatchesData && (
                     <FlatList
                         data={completedMatchesData}
                         keyExtractor={(item) => item.id.toString()}
@@ -69,11 +71,10 @@ const HomeScreen = (props) => {
                             <TouchableOpacity onPress={() => props.navigation.navigate("MatchesScreenStack")}>
                                 <MatchesBanner
                                     item={item}
-                                    team1={[...teamOneData].reverse().find(fetch_team_1 => item.team1_id === fetch_team_1.id)}
-                                    team2={[...teamTwoData].reverse().find(fetch_team_2 => item.team2_id === fetch_team_2.id)}
-                                    team1Stats={teamOneStats.find(fetch_team_1_Stats =>  fetch_team_1_Stats.match_id === item.id )}
-                                    team2Stats={teamTwoStats.reverse().filter(fetch_team_2_Stats => fetch_team_2_Stats.match_id === item.id  )}
-
+                                    // team1={[...teamOneData].reverse().find(fetch_team_1 => item.team1_id === fetch_team_1.id)}
+                                    // team2={[...teamTwoData].reverse().find(fetch_team_2 => item.team2_id === fetch_team_2.id)}
+                                    // team1Stats={teamOneStats.find(fetch_team_1_Stats =>  item.id === fetch_team_1_Stats.match_id )}
+                                    // team2Stats={teamTwoStats.reverse().filter(fetch_team_2_Stats => item.id === fetch_team_2_Stats.match_id  )}
                                 />
                             </TouchableOpacity>
                         )}
@@ -88,12 +89,12 @@ const HomeScreen = (props) => {
                         marginBottom: "2%",
                     }}
                 />
-                <Text style={styles.newsHeading}>News </Text>
+                <Text style={styles.newsHeading}>Info </Text>
                 <View style={styles.newsWrapper}>
                     <Text style={styles.newsTextHeading}>Rules for creating matches</Text>
                     <View style={styles.newsContainer}>
                         <View style={styles.bullet}/>
-                        <Text style={styles.text}>First of all sports coordinator will create team.</Text>
+                        <Text style={styles.text}>First of all captain will create team.</Text>
                     </View>
                     <View style={styles.newsContainer}>
                         <View style={styles.bullet}/>
@@ -125,12 +126,14 @@ const HomeScreen = (props) => {
                     {/*    </View>*/}
                     {/*</TouchableOpacity>*/}
                 </View>
+                {!user &&
                 <TouchableOpacity onPress={openMessageModal}>
                     <View style={styles.sendWhatsappMessageWrapper}>
                         <MaterialCommunityIcons name="email" size={35} color={colors.white}/>
                         <Text style={styles.sendMessageButtonText}>Send Message</Text>
                     </View>
                 </TouchableOpacity>
+                }
             </View>
             {isPressed &&
                 <MessageModal isPressed={isPressed} setIsPressed={setIsPressed}/>

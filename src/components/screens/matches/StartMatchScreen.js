@@ -24,10 +24,13 @@ const StartMatchScreen = (props) => {
     const {bowlingTeam} = route.params;
     const {bowlingTeamPlayers} = route.params;
     const {players} = route.params;
+    console.log("HHH",players)
+
     const {matchOvers} = route.params;
     const {matchDetails} = route.params;
     const [batting, setBatting] = useState(battingTeam);
     const [bowling, setBowling] = useState(bowlingTeam);
+    const [zeroScore, setZero] = useState(false);
     const [battingPlayers, setBattingPlayers] = useState(players);
     const [bowlingPlayers, setBowlingPlayers] = useState(bowlingTeamPlayers);
     const [firstInningsData, setFirstInningsData] = useState(null);
@@ -38,6 +41,7 @@ const StartMatchScreen = (props) => {
     const [secondInningsStriker, setSecondInningsStriker] = useState(false)
     const [newPlayer, setNewPlayer] = useState(false);
     const [undoScore, setUndoScore] = useState(0);
+    const [startScore, setStartScore] = useState(false);
     const [undo, setUndo] = useState(false);
     const [teamScore, setTeamScore] = useState(0);
     const [changeBowler, setChangeBowler] = useState(false);
@@ -116,16 +120,18 @@ const StartMatchScreen = (props) => {
         setPartnership(0);
         setPartnershipScore(0);
         setFinishFirstInnings(true);
-        setFirstInningsScore(firstInningsData.team_score)
+        setFirstInningsScore(firstInningsData.team1_score)
         setStartSecondInnings(true);
         setBattingPlayers(bowlingTeamPlayers);
         setBowlingPlayers(players);
+        setZero(false);
+        setStartScore(false);
     }
 
     const wicketsUpdater = () => {
         setWickets(wickets + 1)
         setBowlerWicket(bowlerWicket + 1)
-        setBalls(balls => balls + 1);
+        // setBalls(balls => balls + 1);
         setPartnership(0)
         setPartnershipScore(teamScore)
         addOver("W");
@@ -161,7 +167,7 @@ const StartMatchScreen = (props) => {
     useEffect(() => {
         setWideNoBall(false)
         setPartnership(teamScore - partnershipScore)
-        if (teamScore > 0 && !wideNoBall) {
+        if (teamScore >= 0 && !wideNoBall && startScore) {
             setBalls(balls => balls + 1);
             if (balls === 5) {
                 setOvers(overs => overs + 1);
@@ -177,7 +183,7 @@ const StartMatchScreen = (props) => {
                 }
             }
         }
-    }, [teamScore]);
+    }, [teamScore, strikerBalls, nonStrikerBalls, wickets]);
 
     useEffect(() => {
         if (undoScore > 0) {
@@ -220,7 +226,7 @@ const StartMatchScreen = (props) => {
                     updateMatchStatus(wicketsRemain);
                 }
             } else if (teamScore < firstInningsScore) {
-                const scoreRemain = `${bowlingTeam} won by ${firstInningsScore - teamScore} runs`;
+                const scoreRemain = `${battingTeam} won by ${firstInningsScore - teamScore} runs`;
                 !_.isEmpty(scoreRemain)
                 {
                     updateMatchStatus(scoreRemain);
@@ -242,27 +248,53 @@ const StartMatchScreen = (props) => {
     };
 
     const finishInning = () => {
-        axios.post(`${API_BASE_URL}/matches_stat`,
-            {
-                match_stat: {
-                    match_id: matchDetails.id,
-                    overs: matchOvers,
-                    team_id: batting,
-                    team_score: teamScore,
-                    wickets: wickets
-                }
-            })
-            .then(response => {
-                setFirstInningsData(response.data.first_innings_stats)
-                Toast.show({type: "success", text1: "Innings Data Saved Successfully"})
-                setFinishFirstInnings(true);
-            }).catch(err => Toast.show({
-            type: "error",
-            text1: (err.response && err.response.data.error) || err.message
-        }));
+        if (!startSecondInnings && !finishFirstInnings) {
+            console.log("teamname", batting)
+            axios.put(`${API_BASE_URL}/matches/${matchDetails.id}`,
+                {
+                    match: {
+                        id: matchDetails.id,
+                        team1_score: teamScore,
+                        team1_overs: matchOvers,
+                        team1_wickets: wickets,
+                        team1_name: batting
+                    }
+                })
+                .then(response => {
+                    setFirstInningsData(response.data.match)
+                    Toast.show({type: "success", text1: "Innings Data Saved Successfully"})
+                    setFinishFirstInnings(true);
+                }).catch(err => Toast.show({
+                type: "error",
+                text1: (err.response && err.response.data.error) || err.message
+            }));
+        }
+        if (startSecondInnings && finishFirstInnings && !finishSecondInnings) {
+            axios.put(`${API_BASE_URL}/matches/${matchDetails.id}`,
+                {
+                    match: {
+                        id: matchDetails.id,
+                        team2_score: teamScore,
+                        team2_overs: matchOvers,
+                        team2_wickets: wickets,
+                        team2_name: batting
+                    }
+                })
+                .then(response => {
+                    // setFirstInningsData(response.data.first_innings_stats)
+                    Toast.show({type: "success", text1: "Innings Data Saved Successfully"})
+                    setFinishSecondInnings(true);
+                }).catch(err => Toast.show({
+                type: "error",
+                text1: (err.response && err.response.data.error) || err.message
+            }));
+        }
     };
 
     const addScore = (score) => {
+        if (score === 0) {
+            setZero(true);
+        }
         addOver(score);
         if ((score === 1 || score === 3) && (changeStriker && !changeNonStriker)) {
             setTeamScore(teamScore + score);
@@ -276,7 +308,7 @@ const StartMatchScreen = (props) => {
             setNonStrikerBalls(nonStrikerBalls + 1);
             setChangeStriker(true);
             setChangeNonStriker(false);
-        } else if ((score !== 1 || score !== 3) && (changeStriker && !changeNonStriker)) {
+        } else if ((score !== 1 || score !== 3 ) && (changeStriker && !changeNonStriker)) {
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
@@ -439,7 +471,7 @@ const StartMatchScreen = (props) => {
                      wideNoBallScoreUpdater={wideNoBallScoreUpdater}
                      setChangeStriker={setChangeStriker} setChangeNonStriker={setChangeStriker} addScore={addScore}
                      changeStriker={changeStriker} changeNonStriker={changeNonStriker} setUndo={setUndo}
-                     undoScore={undoScore} setUndoScore={setUndoScore}
+                     undoScore={undoScore} setUndoScore={setUndoScore} setStartScore={setStartScore}
                      setNewPlayer={setNewPlayer} newPlayer={newPlayer} players={players}
                      setStrikerBatsman={setStrikerBatsman} setNonStrikerBatsman={setNonStrikerBatsman}/>
             {changeBowler && !finishFirstInnings &&
@@ -450,7 +482,7 @@ const StartMatchScreen = (props) => {
                                    setChangeBowler={setChangeBowler} text={"Select Striker Bowler"}
                                    heading={"Second Innings"}/>}
             {startSecondInnings && !secondInningsStriker &&
-                <NewPlayerSelectModal setSecondInningsStriker={setSecondInningsStriker}
+                <NewPlayerSelectModal setSecondInningsStriker={setSecondInningsStriker} secondInningsStriker={secondInningsStriker}
                                       startSecondInnings={startSecondInnings} players={battingPlayers}
                                       setStrikerBatsman={setStrikerBatsman} setNonStrikerBatsman={setNonStrikerBatsman}
                                       setNewPlayer={setNewPlayer}/>}

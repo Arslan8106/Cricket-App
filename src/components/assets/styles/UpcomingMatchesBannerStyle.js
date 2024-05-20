@@ -19,6 +19,13 @@ export default StyleSheet.create({
         borderWidth: 1,
         borderLeftColor: colors.darkBlue,
     },
+    deleteMatchIcon: {
+        position: 'absolute',
+        top: 6,
+        right: 5,
+        zIndex: 1,
+        alignSelf: "flex-end"
+    },
     mainMatchHeading: {
         paddingLeft: 12,
         paddingRight: 2,

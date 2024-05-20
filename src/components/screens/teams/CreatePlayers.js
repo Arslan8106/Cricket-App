@@ -22,7 +22,7 @@ import {Dropdown} from "react-native-element-dropdown";
 import AntDesign from "@expo/vector-icons/AntDesign";
 
 const CreatePlayers = (props) => {
-    const [players, setPlayers] = useState([{name: '', age: '', email: '', player_type: ''}]);
+    const [players, setPlayers] = useState([{name: '', age: '', email: '', player_type: '', batting_style: ''}]);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
 
     const handleChange = (index, field, value) => {
@@ -44,7 +44,7 @@ const CreatePlayers = (props) => {
     };
 
     const handleAddPlayer = () => {
-        setPlayers([...players, {name: '', age: '', email: '', player_type: ''}]);
+        setPlayers([...players, {name: '', age: '', email: '', player_type: '', batting_style:''}]);
     };
 
     const handleSave = () => {
@@ -61,6 +61,10 @@ const CreatePlayers = (props) => {
         { label: 'Batsman', value: 'Batsman' },
         { label: 'Bowler', value: 'Bowler' },
         { label: 'AllRounder', value: 'AllRounder' },
+    ];
+    const styleData = [
+        { label: 'Right Handed', value: 'Right Handed' },
+        { label: 'Left Handed', value: 'Left Handed' },
     ];
 
     return (
@@ -113,6 +117,23 @@ const CreatePlayers = (props) => {
                                         placeholder="Select Player Type"
                                         value={player.player_type}
                                         onChange={(text) => handleChange(index, 'player_type', text.value)}
+                                        renderLeftIcon={() => (
+                                            <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+                                        )}
+                                    />
+                                    <Dropdown
+                                        style={styles.dropdown}
+                                        placeholderStyle={styles.placeholderStyle}
+                                        selectedTextStyle={styles.selectedTextStyle}
+                                        inputSearchStyle={styles.inputSearchStyle}
+                                        iconStyle={styles.iconStyle}
+                                        data={styleData}
+                                        maxHeight={300}
+                                        labelField="label"
+                                        valueField="value"
+                                        placeholder="Select Batting Style"
+                                        value={player.batting_style}
+                                        onChange={(text) => handleChange(index, 'batting_style', text.value)}
                                         renderLeftIcon={() => (
                                             <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
                                         )}

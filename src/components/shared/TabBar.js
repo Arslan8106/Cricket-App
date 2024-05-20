@@ -9,11 +9,15 @@ import CreatePlayers from "../screens/teams/CreatePlayers";
 import CreateTeam from "../screens/teams/CreateTeam";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MatchesScreenStack from "../screens/matches/MatchesScreenStack";
+import {connect} from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
-const TabBar = ({ navigation, route }) => {
+const TabBar = ({ navigation, route, user }) => {
   const [checkActive, setCheckActive] = useState("");
+  const userCheck = user["user"]["user"]["user"]["role"] === "admin"
+  console.log("user", userCheck);
+
   const getHeaderTitle = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "HomeScreen";
     switch (routeName) {
@@ -79,6 +83,7 @@ const TabBar = ({ navigation, route }) => {
         unmountOnBlur: true,
       }}
                   />
+      {!userCheck &&
       <Tab.Screen name="CreateTeam" component={CreateTeam} options={{
         headerShown: false,
         tabBarLabel: "",
@@ -87,6 +92,8 @@ const TabBar = ({ navigation, route }) => {
         unmountOnBlur: true,
       }}
       />
+      }
+      {!userCheck &&
       <Tab.Screen name="CreatePlayer" component={CreatePlayers} options={{
         headerShown: false,
         tabBarLabel: "",
@@ -95,6 +102,7 @@ const TabBar = ({ navigation, route }) => {
         unmountOnBlur: true,
       }}
       />
+      }
       {/*<Tab.Screen name="ProfileScreen" component={BarcodeScreenStack} options={{*/}
       {/*  headerShown: false,*/}
       {/*  tabBarLabel: "",*/}
@@ -120,4 +128,10 @@ const TabBar = ({ navigation, route }) => {
     </Tab.Navigator>
   );
 };
-export default TabBar;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.isAuthenticated,
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(TabBar);

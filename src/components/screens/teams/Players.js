@@ -15,7 +15,7 @@ const Players = (props) => {
     return (
         <View>
             <Text style={styles.mainHeading}>Players</Text>
-            {players.map(player => (
+            {players && players.map(player => (
                 <Pressable onPress={() => {
                     !_.isEmpty(player) ? setPlayer(player) : ''
                 }}>
@@ -38,6 +38,7 @@ const Players = (props) => {
             {activePlayer &&
             <UpdatePlayerModal activePlayer={activePlayer} updateModalVisisble={updateModalVisible} setUpdateModalVisible={setUpdateModalVisible}/>
             }
+
         </View>
     )
 }

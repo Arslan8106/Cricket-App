@@ -99,7 +99,13 @@ const NewPlayerSelectModal = (props) => {
                             )}
                         />
                     }
-                    {striker && (
+                    {striker && props.startSecondInnings && nonStriker &&(
+                        <TouchableOpacity onPress={props.startSecondInnings ? inningsBatsmanSelect : batsmanSelect}>
+                            <MaterialCommunityIcons name="arrow-right-circle" size={95} color={colors.primary}
+                                                    style={{paddingTop: 10}}/>
+                        </TouchableOpacity>
+                    )}
+                    {striker && !props.startSecondInnings &&(
                         <TouchableOpacity onPress={props.startSecondInnings ? inningsBatsmanSelect : batsmanSelect}>
                             <MaterialCommunityIcons name="arrow-right-circle" size={95} color={colors.primary}
                                                     style={{paddingTop: 10}}/>
