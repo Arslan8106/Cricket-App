@@ -9,7 +9,6 @@ export default StyleSheet.create({
     },
     mainHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Light",
         fontSize: 25,
         letterSpacing: 0,
         color: colors.black,
@@ -17,21 +16,18 @@ export default StyleSheet.create({
     },
     teamScoreHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Light",
         fontSize: 16,
         letterSpacing: 0,
         color: colors.black,
     },
     teamNewsHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 16,
         letterSpacing: 0,
         color: colors.darkBlue,
     },
     partnershipHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Bold",
         fontSize: 18,
         letterSpacing: 0,
         color: colors.grey,
@@ -49,7 +45,6 @@ export default StyleSheet.create({
     },
     batterNameHeadingTextWrapper: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 14,
         letterSpacing: 0,
         color: colors.black,
@@ -57,7 +52,6 @@ export default StyleSheet.create({
     },
     batterNewsTextWrapper: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 14,
         letterSpacing: 0,
         color: colors.black,
@@ -65,7 +59,6 @@ export default StyleSheet.create({
     },
     batterNameTextWrapper: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 14,
         letterSpacing: 0,
         color: "blue",
@@ -88,7 +81,6 @@ export default StyleSheet.create({
     overTextWrapper: {
         width: "32%",
         textAlign: "left",
-        fontFamily: "Poppins-Bold",
         fontSize: 14,
         letterSpacing: 0,
         color: colors.black,
@@ -97,7 +89,6 @@ export default StyleSheet.create({
     },
     overNewsTextWrapper: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 14,
         letterSpacing: 0,
         color: colors.black,
@@ -109,29 +100,78 @@ export default StyleSheet.create({
     },
 
     lowerContainer: {
-        paddingHorizontal: "1%",
+        paddingHorizontal: "2%",
         flexDirection: "row",
+        justifyContent: "space-evenly",
+        marginVertical: "1%"
     },
     secondLowerContainer: {
-        paddingHorizontal: "1%",
-        width: "36.5%",
+        paddingHorizontal: "2%",
         flexDirection: "row",
         paddingBottom: '5%',
-
+        justifyContent: "space-evenly"
     },
     runsButtonWrapper: {
-      borderRadius: 8,
-      paddingVertical: "5%",
-      paddingHorizontal: "8%",
-        backgroundColor: colors.primary,
+      paddingVertical: "6%",
+      paddingHorizontal: "9%",
+        backgroundColor: colors.lightWhite,
         borderColor: colors.darkBlue,
         borderWidth: 3,
+        alignItems: "center"
+    },
+    runsWrapper: {
+      paddingVertical: "6%",
+      paddingHorizontal: "9%",
+        width: "100%",
+        backgroundColor: colors.lightWhite,
+        borderColor: colors.darkBlue,
+        borderWidth: 3,
+        alignItems: "center"
+    },
+    nbRunsButtonWrapper: {
+      paddingVertical: "6%",
+      paddingHorizontal: "8.5%",
+        backgroundColor: colors.lightWhite,
+        borderColor: colors.darkBlue,
+        borderWidth: 3,
+        alignItems: "center",
+        width: "95%"
+
     },
     runsText: {
         textAlign: "center",
         color: colors.darkBlue,
-        fontFamily: "Poppins-Bold",
-        fontSize: 18
+        fontWeight: "bold",
+        fontSize: 18,
+        width: "50%"
+    },
+    sixRunsText: {
+        textAlign: "center",
+        color: colors.darkBlue,
+        fontWeight: "bold",
+        fontSize: 16,
+        width: "50%"
+    },
+    undoRunsText: {
+        textAlign: "center",
+        color: colors.darkBlue,
+        fontWeight: "bold",
+        fontSize: 17,
+        width: "60%"
+    },
+    rtdRunsText: {
+        textAlign: "center",
+        color: colors.darkBlue,
+        fontWeight: "bold",
+        fontSize: 16,
+        width: "50%"
+    },
+    rtrRunsText: {
+        textAlign: "center",
+        color: colors.darkBlue,
+        fontWeight: "bold",
+        fontSize: 14,
+        width: "50%"
     },
 
 })

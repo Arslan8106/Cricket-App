@@ -17,7 +17,6 @@ export default StyleSheet.create({
         backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
     mainLabel: {
-        fontFamily: "Poppins-Bold",
         fontSize: 22,
         paddingBottom: 5,
         color: colors.black,
@@ -57,7 +56,7 @@ export default StyleSheet.create({
     },
     dateTimeStyle: {
         paddingVertical: "3%",
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         fontSize: 18,
         paddingBottom: 5,
         color: colors.black,
@@ -67,7 +66,7 @@ export default StyleSheet.create({
       flexDirection: "column"
     },
     selectTeamLabel: {
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         fontSize: 17,
         paddingBottom: 5,
         color: colors.black,
@@ -114,7 +113,6 @@ export default StyleSheet.create({
     createMatchText: {
         marginVertical: 8,
         textAlign: "center",
-        fontFamily: "Poppins-SemiBold",
         fontWeight: "600",
         fontSize: 16,
         color: colors.black,

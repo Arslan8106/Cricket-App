@@ -11,7 +11,6 @@ export default StyleSheet.create({
     },
     mainHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Bold",
         fontWeight: "bold",
         fontSize: 28,
         letterSpacing: 0,
@@ -25,7 +24,6 @@ export default StyleSheet.create({
         marginBottom: '4%'
     },
     label: {
-        fontFamily: "Poppins-Medium",
         fontSize: 18,
         marginBottom: 5,
         color: colors.black,
@@ -59,7 +57,6 @@ export default StyleSheet.create({
         paddingVertical: "2%",
         color: colors.white,
         paddingHorizontal: "1%",
-        fontFamily: "Poppins-Medium",
         fontWeight: "500",
         fontSize: 23,
         backgroundColor: colors.darkBlue,
@@ -75,7 +72,6 @@ export default StyleSheet.create({
         paddingVertical: "2%",
         color: colors.white,
         paddingHorizontal: "1%",
-        fontFamily: "Poppins-Medium",
         fontWeight: "500",
         fontSize: 23,
         backgroundColor: colors.primary,
@@ -86,7 +82,7 @@ export default StyleSheet.create({
     captainNameText: {
         color: colors.black,
         fontSize: 17,
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         alignItems: "center",
         textTransform: "uppercase",
     },

@@ -15,7 +15,7 @@ export default StyleSheet.create({
     mainHeading: {
         paddingVertical: "2%",
         paddingHorizontal: "3%",
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         textAlign: "center",
         fontSize: 20,
         letterSpacing: 0,
@@ -44,7 +44,6 @@ export default StyleSheet.create({
     },
     detailsHeadingText: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontSize: 16,
         letterSpacing: 0,
         color: colors.black,
@@ -52,7 +51,6 @@ export default StyleSheet.create({
     matchDetailsText: {
         paddingVertical: "1%",
         textAlign: "left",
-        fontFamily: "Poppins-Light",
         fontSize: 14,
         letterSpacing: 0,
         color: colors.black,

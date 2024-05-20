@@ -13,7 +13,6 @@ const header = StyleSheet.create({
     borderBottomEndRadius: 8,
   },
   title: {
-    fontFamily: "Poppins-Bold",
     fontSize: 24,
     fontWeight: "bold",
     lineHeight: 54,

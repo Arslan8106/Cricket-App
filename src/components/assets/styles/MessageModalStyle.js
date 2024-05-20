@@ -24,14 +24,13 @@ export default StyleSheet.create({
     congrulationsBookingText: {
         paddingVertical: '5%',
         textAlign: "center",
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         fontSize: 21,
         color: colors.midLightBlack,
         opacity: 1,
     },
     bookingSuccessfulText: {
         textAlign: "center",
-        fontFamily: "Poppins-Normal",
         fontSize: 14,
         color: colors.midLightBlack,
         opacity: 1,
@@ -66,7 +65,6 @@ export default StyleSheet.create({
     sendMessageText: {
         color: colors.black,
         fontSize: 15,
-        fontFamily: "Poppins-Medium",
         alignItems: "center",
     }
 });

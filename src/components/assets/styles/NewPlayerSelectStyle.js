@@ -33,7 +33,6 @@ export default StyleSheet.create({
     setupMatchWrapperHeading: {
         paddingVertical: '1%',
         textAlign: "center",
-        fontFamily: "Poppins-Bold",
         fontWeight: "bold",
         fontSize: 22,
         color: colors.midLightBlack,

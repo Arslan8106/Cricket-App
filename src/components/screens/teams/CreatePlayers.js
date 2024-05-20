@@ -131,7 +131,7 @@ const CreatePlayers = (props) => {
                                         maxHeight={300}
                                         labelField="label"
                                         valueField="value"
-                                        placeholder="Select Batting Style"
+                                        placeholder="Select Style"
                                         value={player.batting_style}
                                         onChange={(text) => handleChange(index, 'batting_style', text.value)}
                                         renderLeftIcon={() => (

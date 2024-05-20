@@ -27,7 +27,6 @@ export default StyleSheet.create({
     },
     signInStyle: {
         textAlign: "center",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 25,
         letterSpacing: 0,
@@ -46,7 +45,6 @@ export default StyleSheet.create({
         color: colors.white,
     },
     innerTextInput: {
-        fontFamily: "Poppins-Regular",
         color: colors.white,
     },
     forgotLinksWrapper: {
@@ -78,7 +76,6 @@ export default StyleSheet.create({
     },
     emailSendButtonText: {
         textAlign: "center",
-        fontFamily: "Poppins-Bold",
         fontWeight: "900",
         fontSize: 22,
         letterSpacing: 0,
@@ -95,14 +92,12 @@ export default StyleSheet.create({
         paddingVertical: "4%",
         color: colors.primary,
         paddingHorizontal: "1%",
-        fontFamily: "Poppins-Medium",
         fontWeight: "500",
         fontSize: 16,
     },
     notAccountButton: {
         paddingVertical: "4%",
         color: colors.lightGrey,
-        fontFamily: "Poppins-Medium",
         fontWeight: "500",
         fontSize: 15,
     },

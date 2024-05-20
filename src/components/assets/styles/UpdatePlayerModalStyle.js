@@ -17,7 +17,7 @@ export default StyleSheet.create({
     updatePlayerMainText: {
         paddingVertical: '1%',
         textAlign: "center",
-        fontFamily: "Poppins-Bold",
+        fontWeight: "bold",
         fontWeight: "bold",
         fontSize: 21,
         color: colors.midLightBlack,
@@ -59,7 +59,6 @@ export default StyleSheet.create({
         paddingVertical: "2%",
         color: colors.white,
         paddingHorizontal: "1%",
-        fontFamily: "Poppins-Medium",
         fontWeight: "500",
         fontSize: 23,
         backgroundColor: colors.darkBlue,

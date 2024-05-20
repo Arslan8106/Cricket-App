@@ -12,7 +12,6 @@ export default StyleSheet.create({
     },
     mainHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 25,
         letterSpacing: 0,
@@ -37,14 +36,12 @@ export default StyleSheet.create({
         color: colors.white,
         fontSize: 17,
         fontWeight: "bold",
-        fontFamily: "Poppins-Bold",
         alignItems: "center",
         textTransform: "capitalize",
     },
     departmentNameText: {
         color: colors.white,
         fontSize: 15,
-        fontFamily: "Poppins-Light",
         alignItems: "center",
     },
     innerPlayerInfoWrapper: {

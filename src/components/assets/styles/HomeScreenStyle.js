@@ -8,7 +8,6 @@ export default StyleSheet.create({
     },
     mainHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 25,
         letterSpacing: 0,
@@ -20,7 +19,6 @@ export default StyleSheet.create({
     },
     newsHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 27,
         letterSpacing: 0,
@@ -31,7 +29,6 @@ export default StyleSheet.create({
     },
     newsTextHeading: {
         textAlign: "center",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 20,
         letterSpacing: 0,
@@ -62,12 +59,10 @@ export default StyleSheet.create({
         paddingTop: '1.5%',
         color: colors.black,
         fontSize: 14,
-        fontFamily: "Poppins-Light",
     },
     text: {
         color: colors.black,
         fontSize: 14,
-        fontFamily: "Poppins-Light",
     },
     createTeamWrapper: {
         borderRadius: 50,
@@ -100,13 +95,11 @@ export default StyleSheet.create({
     createTeamText: {
         color: colors.white,
         fontSize: 15,
-        fontFamily: "Poppins-Medium",
         alignItems: "center",
     },
     sendMessageButtonText: {
         color: colors.white,
         fontSize: 15,
-        fontFamily: "Poppins-Medium",
         alignItems: "center",
         paddingLeft: '3%'
     }

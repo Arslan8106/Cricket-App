@@ -58,6 +58,8 @@ const StartMatchScreen = (props) => {
     const [oversScore, setOversScore] = useState([]);
     const [balls, setBalls] = useState(0);
     const [wideNoBall, setWideNoBall] = useState(false);
+    const [byesScore, setByesScore] = useState(false);
+    const [byesScoreData, setByesScoreData] = useState(null);
     const [undoWideNoBall, setUndoWideNoBall] = useState(false);
     const [partnership, setPartnership] = useState(0);
     const [partnershipScore, setPartnershipScore] = useState(0);
@@ -163,9 +165,20 @@ const StartMatchScreen = (props) => {
         addOver(type);
         setWideNoBall(true);
     }
+    // const byesScoreUpdater = (score, type) => {
+    //     addOver(type);
+    //     setByesScore(true);
+    // }
+    //
+    //
+    // useEffect(() => {
+    //         setTeamScore(teamScore + byesScoreData);
+    //         setBalls(balls => balls + 1);
+    // }, [byesScore]);
 
     useEffect(() => {
         setWideNoBall(false)
+        // setByesScore(false);
         setPartnership(teamScore - partnershipScore)
             if (balls === 5) {
                 setOvers(overs => overs + 1);
@@ -189,13 +202,13 @@ const StartMatchScreen = (props) => {
             {
             setBalls(balls => balls - 1);
             }
-            if ((undoScore === 1 || undoScore === 3) && (changeStriker && !changeNonStriker)) {
+            if ((undoScore === 1 || undoScore === 3 || undoScore === 5) && (changeStriker && !changeNonStriker)) {
                 setTeamScore(teamScore - undoScore);
                 setNonStrikerScore(nonStrikerScore - undoScore);
                 setNonStrikerBalls(nonStrikerBalls - 1);
                 setChangeStriker(false);
                 setChangeNonStriker(true);
-            } else if ((undoScore === 1 || undoScore === 3) && (changeNonStriker && !changeStriker)) {
+            } else if ((undoScore === 1 || undoScore === 3 || undoScore === 5) && (changeNonStriker && !changeStriker)) {
                 setTeamScore(teamScore - undoScore);
                 setStrikerScore(strikerScore - undoScore);
                 setStrikerBalls(strikerBalls - 1);
@@ -203,12 +216,12 @@ const StartMatchScreen = (props) => {
                 // setNonStrikerBalls(nonStrikerBalls - 1);
                 setChangeStriker(true);
                 setChangeNonStriker(false);
-            } else if ((undoScore !== 1 || undoScore !== 3) && (changeStriker && !changeNonStriker)) {
+            } else if ((undoScore !== 1 || undoScore !== 3 || undoScore !== 5) && (changeStriker && !changeNonStriker)) {
                 setTeamScore(teamScore - undoScore);
                 setStrikerScore(strikerScore - undoScore);
                 setStrikerBalls(strikerBalls - 1);
                 setChangeStriker(true);
-            } else if ((undoScore !== 1 || undoScore !== 3) && (changeNonStriker && !changeStriker)) {
+            } else if ((undoScore !== 1 || undoScore !== 3 || undoScore !== 5) && (changeNonStriker && !changeStriker)) {
                 setTeamScore(teamScore - undoScore);
                 setNonStrikerScore(nonStrikerScore - undoScore);
                 setNonStrikerBalls(nonStrikerBalls - 1);
@@ -318,27 +331,27 @@ const StartMatchScreen = (props) => {
             setZero(true);
         }
         addOver(score);
-        if ((score === 1 || score === 3) && (changeStriker && !changeNonStriker)) {
+        if ((score === 1 || score === 3 || score === 5) && (changeStriker && !changeNonStriker)) {
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
             setBalls(balls => balls + 1);
             setChangeStriker(false);
             setChangeNonStriker(true);
-        } else if ((score === 1 || score === 3) && (changeNonStriker && !changeStriker)) {
+        } else if ((score === 1 || score === 3 || score === 5) && (changeNonStriker && !changeStriker)) {
             setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setNonStrikerScore(nonStrikerScore + score);
             setNonStrikerBalls(nonStrikerBalls + 1);
             setChangeStriker(true);
             setChangeNonStriker(false);
-        } else if ((score !== 1 || score !== 3) && (changeStriker && !changeNonStriker)) {
+        } else if ((score !== 1 || score !== 3 || score !== 5) && (changeStriker && !changeNonStriker)) {
             setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
             setChangeStriker(true);
-        } else if ((score !== 1 || score !== 3) && (changeNonStriker && !changeStriker)) {
+        } else if ((score !== 1 || score !== 3 || score !== 5) && (changeNonStriker && !changeStriker)) {
             setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setNonStrikerScore(nonStrikerScore + score);

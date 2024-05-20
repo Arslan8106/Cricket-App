@@ -17,14 +17,12 @@ export default StyleSheet.create({
     setupMatchWrapper: {
         paddingVertical: '1%',
         textAlign: "center",
-        fontFamily: "Poppins-Bold",
         fontWeight: "bold",
         fontSize: 21,
         color: colors.midLightBlack,
         opacity: 1,
     },
     selectPlayerLabel: {
-        fontFamily: "Poppins-Regular",
         fontSize: 14,
         paddingBottom: 5,
         color: colors.black,
@@ -64,7 +62,6 @@ export default StyleSheet.create({
 
     bookingSuccessfulText: {
         textAlign: "center",
-        fontFamily: "Poppins-Medium",
         fontWeight: "normal",
         fontSize: 14,
         color: colors.midLightBlack,
@@ -100,7 +97,6 @@ export default StyleSheet.create({
     sendMessageText: {
         color: colors.black,
         fontSize: 15,
-        fontFamily: "Poppins-Medium",
         alignItems: "center",
     }
 });

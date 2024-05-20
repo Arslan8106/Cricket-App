@@ -13,7 +13,6 @@ export default StyleSheet.create({
     },
     mainHeading: {
         textAlign: "left",
-        fontFamily: "Poppins-Medium",
         fontWeight: "700",
         fontSize: 25,
         letterSpacing: 0,
@@ -35,7 +34,6 @@ export default StyleSheet.create({
     createMatchText: {
         color: colors.white,
         fontSize: 15,
-        fontFamily: "Poppins-Medium",
         alignItems: "center",
     },
 });

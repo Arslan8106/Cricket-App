@@ -12,7 +12,6 @@ export default StyleSheet.create({
     mainMatchHeading: {
         paddingLeft: 12,
         paddingRight: 2,
-        fontFamily: "Poppins-SemiBold",
         fontSize: 12,
         color: colors.primary,
         opacity: 1,
@@ -31,7 +30,6 @@ export default StyleSheet.create({
     teamNames: {
         paddingLeft: 12,
         paddingRight: 2,
-        fontFamily: "Poppins-Light",
         fontSize: 16,
         fontWeight: "500",
         color: colors.white,
@@ -39,7 +37,6 @@ export default StyleSheet.create({
     },
     teamStats:
         {
-            fontFamily: "Poppins-Bold",
             fontSize: 16,
             fontWeight: "bold",
             color: colors.white,
@@ -63,7 +60,6 @@ export default StyleSheet.create({
     bottomBarText: {
         paddingRight: '2%',
         textAlign: "right",
-        fontFamily: "Poppins-Light",
         fontSize: 14,
         fontWeight: "500",
         color: colors.lightWhite,

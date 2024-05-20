@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import NewPlayerSelectModal from "../modal/NewPlayerSelectModal";
 import SelectExtrasScore from "../modal/SelectExtrasScore";
 import _ from "lodash";
+// import ByesScore from "../modal/ByesScore";
 
 const Buttons = (props) => {
     const [extraScoreModal, setExtraScoreModal] = useState(false);
+    // const [byesScoreModal, setByesScoreModal] = useState(false);
     const [selectScore, setSelectScore] = useState(null);
-    const [scoreDetails, setScoreDetails] = useState({ runs: 0, type: "" });
+    // const [selectByesScore, setByesSelectScore] = useState(null);
+    // const [scoreDetails, setScoreDetails] = useState({ runs: 0, type: "" });
+    // const [scoreByesDetails, setScoreByesDetails] = useState({ runs: 0, type: "" });
 
     const changeStrike = (runs) => {
         props.setUndoScore(runs);
@@ -40,6 +44,10 @@ const Buttons = (props) => {
         props.setUndoWideNoBall(true);
 
     };
+    // const byesScoreUpdater = (runs, type) => {
+    //     setScoreByesDetails({ runs, type });
+    //     setByesScoreModal(true);
+    // };
     const undoFunction = () => {
         props.setUndo(true)
     }
@@ -53,6 +61,17 @@ const Buttons = (props) => {
             setExtraScoreModal(false);
         }
     }, [selectScore, extraScoreModal]);
+    //
+    // useEffect(() => {
+    //     if (!_.isNull(selectByesScore) && byesScoreModal) {
+    //         const score = scoreByesDetails.runs + selectByesScore;
+    //         props.byesScoreUpdater(score, scoreByesDetails.type);
+    //         props.setByesScoreData(score)
+    //         props.setUndoScore(score);
+    //         props.setUndo(false);
+    //         setByesScoreModal(false);
+    //     }
+    // }, [scoreByesDetails, byesScoreModal]);
 
     return (
         <>
@@ -62,30 +81,36 @@ const Buttons = (props) => {
                         <Text style={styles.runsText}>0</Text>
                     </View>
                 </Pressable>
+                <Pressable onPress={() => changeStrike(1)}>
+                    <View style={styles.runsButtonWrapper}>
+                        <Text style={styles.runsText}>1 </Text>
+                    </View>
+                </Pressable>
+                <Pressable onPress={() => remainStrike(2)}>
+                    <View style={styles.runsButtonWrapper}>
+                        <Text style={styles.runsText}>2 </Text>
+                    </View>
+                </Pressable>
+                <Pressable onPress={() => wideNoBallScoreUpdater(1, "WD")}>
+                    <View style={styles.runsButtonWrapper}>
+                        <Text style={styles.rtdRunsText}>Wide </Text>
+                    </View>
+                </Pressable>
 
-                {/*<Pressable onPress={() => remainStrike(0)}>*/}
+
+                {/*<Pressable onPress={() => byesScoreUpdater(0, "B")}>*/}
                 {/*    <View style={styles.runsButtonWrapper}>*/}
                 {/*        <Text style={styles.runsText}>Byes</Text>*/}
                 {/*    </View>*/}
                 {/*</Pressable>*/}
 
-                {/*<Pressable onPress={() => remainStrike(0)}>*/}
+                {/*<Pressable onPress={() => byesScoreUpdater(0, "LB")}>*/}
                 {/*    <View style={styles.runsButtonWrapper}>*/}
                 {/*        <Text style={styles.runsText}>Leg Byes</Text>*/}
                 {/*    </View>*/}
                 {/*</Pressable>*/}
             </View>
             <View style={styles.lowerContainer}>
-                <Pressable onPress={() => changeStrike(1)}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>1</Text>
-                    </View>
-                </Pressable>
-                <Pressable onPress={() => remainStrike(2)}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>2</Text>
-                    </View>
-                </Pressable>
                 <Pressable onPress={() => changeStrike(3)}>
                     <View style={styles.runsButtonWrapper}>
                         <Text style={styles.runsText}>3</Text>
@@ -96,38 +121,42 @@ const Buttons = (props) => {
                         <Text style={styles.runsText}>4</Text>
                     </View>
                 </Pressable>
-                <Pressable onPress={() => remainStrike(6)}>
+
+                <Pressable onPress={() => changeStrike(5)}>
                     <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>6</Text>
+                        <Text style={styles.runsText}>5</Text>
                     </View>
                 </Pressable>
-            </View>
-            <View style={styles.secondLowerContainer}>
-                <Pressable onPress={() => wideNoBallScoreUpdater(1, "WD")}>
+
+                <Pressable onPress={() => undoFunction()}>
                     <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>Wide</Text>
+                        <Text style={styles.undoRunsText}>Undo</Text>
+                    </View>
+                </Pressable>
+
+            </View>
+            <View style={styles.lowerContainer}>
+                <Pressable onPress={() => remainStrike(6)}>
+                    <View style={styles.runsButtonWrapper}>
+                        <Text style={styles.sixRunsText}>6</Text>
                     </View>
                 </Pressable>
                 <Pressable onPress={() => wideNoBallScoreUpdater(1, "NB")}>
                     <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>No Ball</Text>
+                        <Text style={styles.undoRunsText}>N</Text>
                     </View>
                 </Pressable>
                 <Pressable onPress={() => wicketFun()}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>WKT</Text>
-                    </View>
-                </Pressable>
-                <Pressable onPress={() => undoFunction()}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>Undo</Text>
+                    <View style={styles.runsWrapper}>
+                        <Text style={styles.rtdRunsText}>W</Text>
                     </View>
                 </Pressable>
                 <Pressable onPress={() => retireBatsman()}>
                     <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>Retire</Text>
+                        <Text style={styles.rtrRunsText}>Retire</Text>
                     </View>
                 </Pressable>
+
             </View>
             {props.newPlayer && !props.finishFirstInnings &&
                 <NewPlayerSelectModal
@@ -157,6 +186,14 @@ const Buttons = (props) => {
                     setExtraScoreModal={setExtraScoreModal}
                 />
             }
+            {/*{byesScoreModal &&*/}
+            {/*    <ByesScore*/}
+            {/*        setByesScoreModal={setByesScoreModal}*/}
+            {/*        byesScoreModal={byesScoreModal}*/}
+            {/*        selectByesScore={selectByesScore}*/}
+            {/*        setByesSelectScore={setByesSelectScore}*/}
+            {/*    />*/}
+            {/*}*/}
         </>
     );
 };
