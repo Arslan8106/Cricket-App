@@ -63,17 +63,17 @@ const Buttons = (props) => {
                     </View>
                 </Pressable>
 
-                <Pressable onPress={() => remainStrike(0)}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>Byes</Text>
-                    </View>
-                </Pressable>
+                {/*<Pressable onPress={() => remainStrike(0)}>*/}
+                {/*    <View style={styles.runsButtonWrapper}>*/}
+                {/*        <Text style={styles.runsText}>Byes</Text>*/}
+                {/*    </View>*/}
+                {/*</Pressable>*/}
 
-                <Pressable onPress={() => remainStrike(0)}>
-                    <View style={styles.runsButtonWrapper}>
-                        <Text style={styles.runsText}>Leg Byes</Text>
-                    </View>
-                </Pressable>
+                {/*<Pressable onPress={() => remainStrike(0)}>*/}
+                {/*    <View style={styles.runsButtonWrapper}>*/}
+                {/*        <Text style={styles.runsText}>Leg Byes</Text>*/}
+                {/*    </View>*/}
+                {/*</Pressable>*/}
             </View>
             <View style={styles.lowerContainer}>
                 <Pressable onPress={() => changeStrike(1)}>
