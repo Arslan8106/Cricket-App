@@ -1,24 +1,40 @@
-// reducers/userReducer.js
+import { Modal_SUCCESS, LOGIN_SUCCESS, LOGOUT, SIGNUP_SUCCESS } from "./action";
+
 const initialState = {
+    isAuthenticated: false,
     user: null,
     error: null,
-    isAuthenticated: false,
-
+    modalOpen: false,
 };
 
-const userReducer = (state = initialState, action) => {
+const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'LOGIN_SUCCESS':
-            return { ...state, user: action.payload, error: null, isAuthenticated: action.payload.isAuthenticated, };
-        case 'LOGIN_FAILURE':
-            return { ...state, user: null, error: action.payload };
+        case Modal_SUCCESS:
+            return {
+                ...state,
+                modalOpen: action.payload,
+            };
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+            };
+        case SIGNUP_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true,
+                user: action.payload,
+            };
+        case LOGOUT:
+            return {
+                ...state,
+                isAuthenticated: false,
+                user: null,
+            };
         default:
             return state;
-        case 'LOGOUT':
-            return {
-                ...initialState
-            };
     }
 };
 
-export default userReducer;
+export default authReducer;

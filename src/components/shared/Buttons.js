@@ -131,6 +131,17 @@ const Buttons = (props) => {
                     changeStriker={props.changeStriker}
                     setStrikerBatsman={props.setStrikerBatsman}
                     setNonStrikerBatsman={props.setNonStrikerBatsman}
+                    setSelectedPlayers={props.setSelectedPlayers}
+                />
+            }
+            {props.newPlayer && props.finishFirstInnings && props.startSecondInnings &&
+                <NewPlayerSelectModal
+                    setNewPlayer={props.setNewPlayer}
+                    players={props.players}
+                    changeStriker={props.changeStriker}
+                    setStrikerBatsman={props.setStrikerBatsman}
+                    setNonStrikerBatsman={props.setNonStrikerBatsman}
+                    setSelectedPlayers={props.setSelectedPlayers}
                 />
             }
             {extraScoreModal &&

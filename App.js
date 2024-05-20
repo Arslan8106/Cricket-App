@@ -1,7 +1,8 @@
 import React from 'react';
 import Toast from 'react-native-toast-message';
-import {Provider} from 'react-redux';
-import store from './src/redux';
+import { Provider } from "react-redux";
+import { store, persistor } from "./src/redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 import AppContainer from "./src/components/main_container/AppContainer";
 import {useFonts} from "expo-font";
 
@@ -17,8 +18,10 @@ export default function App() {
     return (
         isLoaded && (
             <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
                 <AppContainer/>
                 <Toast/>
+                </PersistGate>
             </Provider>
         )
 )

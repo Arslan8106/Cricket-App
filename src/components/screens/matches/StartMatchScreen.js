@@ -24,8 +24,6 @@ const StartMatchScreen = (props) => {
     const {bowlingTeam} = route.params;
     const {bowlingTeamPlayers} = route.params;
     const {players} = route.params;
-    console.log("HHH",players)
-
     const {matchOvers} = route.params;
     const {matchDetails} = route.params;
     const [batting, setBatting] = useState(battingTeam);
@@ -63,6 +61,7 @@ const StartMatchScreen = (props) => {
     const [partnership, setPartnership] = useState(0);
     const [partnershipScore, setPartnershipScore] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
+    const [notUndo, setNotUndo] = useState(true);
     const layout = useWindowDimensions();
     const [index, setIndex] = React.useState(0);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
@@ -187,15 +186,37 @@ const StartMatchScreen = (props) => {
 
     useEffect(() => {
         if (undoScore > 0) {
-            setTeamScore(teamScore - undoScore);
-            if (changeStriker) {
-                setStrikerScore(strikerScore - undoScore);
-                setStrikerBalls(strikerBalls - 1);
-            } else if (changeNonStriker) {
+            removeLastBall()
+            setBalls(balls => balls - 1);
+            if ((undoScore === 1 || undoScore === 3) && (changeStriker && !changeNonStriker)) {
+                setTeamScore(teamScore - undoScore);
                 setNonStrikerScore(nonStrikerScore - undoScore);
                 setNonStrikerBalls(nonStrikerBalls - 1);
+                setChangeStriker(false);
+                setChangeNonStriker(true);
+            } else if ((undoScore === 1 || undoScore === 3) && (changeNonStriker && !changeStriker)) {
+                setTeamScore(teamScore - undoScore);
+                setStrikerScore(strikerScore - undoScore);
+                setStrikerBalls(strikerBalls - 1);
+                // setNonStrikerScore(nonStrikerScore - undoScore);
+                // setNonStrikerBalls(nonStrikerBalls - 1);
+                setChangeStriker(true);
+                setChangeNonStriker(false);
+            } else if ((undoScore !== 1 || undoScore !== 3) && (changeStriker && !changeNonStriker)) {
+                setTeamScore(teamScore - undoScore);
+                setStrikerScore(strikerScore - undoScore);
+                setStrikerBalls(strikerBalls - 1);
+                setChangeStriker(true);
+            } else if ((undoScore !== 1 || undoScore !== 3) && (changeNonStriker && !changeStriker)) {
+                setTeamScore(teamScore - undoScore);
+                setNonStrikerScore(nonStrikerScore - undoScore);
+                setNonStrikerBalls(nonStrikerBalls - 1);
+                setChangeNonStriker(true);
             }
         }
+        setUndo(false);
+        setNotUndo(false);
+        setUndoScore(0)
     }, [undo]);
     useEffect(() => {
         if (overs === matchOvers || wickets === 10 || (teamScore > firstInningsScore && (firstInningsScore > 0))) {
@@ -249,7 +270,6 @@ const StartMatchScreen = (props) => {
 
     const finishInning = () => {
         if (!startSecondInnings && !finishFirstInnings) {
-            console.log("teamname", batting)
             axios.put(`${API_BASE_URL}/matches/${matchDetails.id}`,
                 {
                     match: {
@@ -308,7 +328,7 @@ const StartMatchScreen = (props) => {
             setNonStrikerBalls(nonStrikerBalls + 1);
             setChangeStriker(true);
             setChangeNonStriker(false);
-        } else if ((score !== 1 || score !== 3 ) && (changeStriker && !changeNonStriker)) {
+        } else if ((score !== 1 || score !== 3) && (changeStriker && !changeNonStriker)) {
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
@@ -332,6 +352,20 @@ const StartMatchScreen = (props) => {
         } else {
             const updatedOvers = [...oversScore];
             updatedOvers[lastOverIndex].balls.push(score);
+            setOversScore(updatedOvers);
+        }
+    };
+
+    const removeLastBall = () => {
+        const updatedOvers = [...oversScore];
+        if (updatedOvers.length > 0) {
+            const lastOver = updatedOvers[updatedOvers.length - 1];
+            if (lastOver.balls.length > 0) {
+                lastOver.balls.pop(); // Remove the last ball data from the last over
+            } else {
+                // If the last over has no balls, remove the entire over
+                updatedOvers.pop();
+            }
             setOversScore(updatedOvers);
         }
     };
@@ -473,6 +507,7 @@ const StartMatchScreen = (props) => {
                      changeStriker={changeStriker} changeNonStriker={changeNonStriker} setUndo={setUndo}
                      undoScore={undoScore} setUndoScore={setUndoScore} setStartScore={setStartScore}
                      setNewPlayer={setNewPlayer} newPlayer={newPlayer} players={players}
+                     startSecondInnings={startSecondInnings}
                      setStrikerBatsman={setStrikerBatsman} setNonStrikerBatsman={setNonStrikerBatsman}/>
             {changeBowler && !finishFirstInnings &&
                 <ChangeBowlerModal bowlingTeamPlayers={bowlingTeamPlayers} setBowler={setBowler}
@@ -482,7 +517,8 @@ const StartMatchScreen = (props) => {
                                    setChangeBowler={setChangeBowler} text={"Select Striker Bowler"}
                                    heading={"Second Innings"}/>}
             {startSecondInnings && !secondInningsStriker &&
-                <NewPlayerSelectModal setSecondInningsStriker={setSecondInningsStriker} secondInningsStriker={secondInningsStriker}
+                <NewPlayerSelectModal setSecondInningsStriker={setSecondInningsStriker}
+                                      secondInningsStriker={secondInningsStriker}
                                       startSecondInnings={startSecondInnings} players={battingPlayers}
                                       setStrikerBatsman={setStrikerBatsman} setNonStrikerBatsman={setNonStrikerBatsman}
                                       setNewPlayer={setNewPlayer}/>}

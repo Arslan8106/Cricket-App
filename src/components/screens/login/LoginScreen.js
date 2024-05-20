@@ -13,8 +13,8 @@ import colors from "../../assets/colors/colors";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import Toast from "react-native-toast-message";
-import {loginFailure, loginSuccess} from "../../../redux/action";
-import {connect} from "react-redux";
+import {loginSuccess} from "../../../redux/action";
+import {connect, useDispatch} from "react-redux";
 
 
 const LoginScreen = (props) => {
@@ -22,13 +22,14 @@ const LoginScreen = (props) => {
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
+    const dispatch = useDispatch();
 
     const Login = () => {
         axios.post(`${API_BASE_URL}/users/sign_in`, {
           user: { email: email, password: password}
         }).then((response) => {
             if (response && response.data) {
-                props.loginSuccess({ user: response.data, isAuthenticated: true });
+                dispatch(loginSuccess(response.data.user));
                 navigation.navigate("HomeScreen", response.data);
                 Toast.show({ type: "success", text1: "Welcome" })
             }
@@ -208,14 +209,4 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.isAuthenticated,
-        user: state.user,
-    };
-};
-const mapDispatchToProps = {
-    loginSuccess,
-    loginFailure
-};
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default LoginScreen;

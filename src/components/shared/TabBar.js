@@ -9,14 +9,16 @@ import CreatePlayers from "../screens/teams/CreatePlayers";
 import CreateTeam from "../screens/teams/CreateTeam";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import MatchesScreenStack from "../screens/matches/MatchesScreenStack";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const TabBar = ({ navigation, route, user }) => {
   const [checkActive, setCheckActive] = useState("");
-  const userCheck = user["user"]["user"]["user"]["role"] === "admin"
-  console.log("user", userCheck);
+  const Check = useSelector(state => state.user);
+
+  const userCheck = Check["role"] === "admin"
+  console.log("user1111", userCheck);
 
   const getHeaderTitle = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "HomeScreen";
@@ -128,10 +130,5 @@ const TabBar = ({ navigation, route, user }) => {
     </Tab.Navigator>
   );
 };
-const mapStateToProps = state => {
-  return {
-    isAuthenticated: state.isAuthenticated,
-    user: state.user,
-  };
-};
-export default connect(mapStateToProps)(TabBar);
+
+export default TabBar;

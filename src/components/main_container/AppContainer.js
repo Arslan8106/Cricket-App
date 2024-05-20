@@ -4,12 +4,14 @@ import HomeScreen from '../screens/home/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {useSelector} from "react-redux";
+
 import colors from "../assets/colors/colors";
 import TabBar from "../shared/TabBar";
 
 const AppContainer = () => {
     const Stack = createNativeStackNavigator();
-    const isAuthenticated = useSelector((state) => state.user.isAuthenticated); // Get authentication status from Redux state
+    const isAuthenticated = useSelector(state => state.isAuthenticated);
+
     return(
         <NavigationContainer>
             <Stack.Navigator initialRouteName="LoginScreen">

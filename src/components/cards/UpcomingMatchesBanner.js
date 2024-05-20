@@ -3,15 +3,16 @@ import React, {useState} from "react";
 import styles from "../../components/assets/styles/UpcomingMatchesBannerStyle";
 import _ from "lodash";
 import StartMatchModal from "../modal/StartMatchModal";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import colors from "../assets/colors/colors";
 
-const UpcomingMatchesBanner = ({item,team1, team2, user, deleteMatch}) => {
+const UpcomingMatchesBanner = ({item,team1, team2, deleteMatch}) => {
 
     const [updateModalVisible, setUpdateModalVisible] = useState(false);
     const [activeMatch, setActiveMatch] = useState(null);
-    const userCheck = user["user"]["user"]["user"]["role"] === "admin"
+    const Check = useSelector(state => state.user);
+    const userCheck = Check["role"] === "admin"
 
     let numberOfDays = 0;
     const startMatch = (match) => {
@@ -75,11 +76,4 @@ const UpcomingMatchesBanner = ({item,team1, team2, user, deleteMatch}) => {
         </View>
     );
 };
-const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.isAuthenticated,
-        user: state.user,
-    };
-};
-
-export default connect(mapStateToProps)(UpcomingMatchesBanner);
+export default UpcomingMatchesBanner;

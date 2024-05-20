@@ -14,8 +14,8 @@ import Toast from "react-native-toast-message";
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from "../../assets/styles/SignupScreenStyle"
-import {loginFailure, loginSuccess} from "../../../redux/action";
-import {connect} from "react-redux";
+import {loginSuccess} from "../../../redux/action";
+import {useDispatch} from "react-redux";
 const SignupScreen = (props) => {
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -23,14 +23,14 @@ const SignupScreen = (props) => {
     const [role, setRole] = useState(null);
     const navigation = useNavigation();
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
-
+    const dispatch = useDispatch();
 
     const Signup = () => {
         axios.post(`${API_BASE_URL}/users`, {
             user: { email: email, password: password, username: name, role: role}
         }).then((response) => {
             if (response && response.data) {
-                props.loginSuccess({ user: response.data, isAuthenticated: true });
+                dispatch(loginSuccess(response.data.user));
                 navigation.navigate("HomeScreen", response.data);
                 Toast.show({ type: "success", text1: "Welcome" })
             }
@@ -130,15 +130,4 @@ const SignupScreen = (props) => {
     )
         ;
 }
-
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.isAuthenticated,
-        user: state.user,
-    };
-};
-const mapDispatchToProps = {
-    loginSuccess,
-    loginFailure
-};
-export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);
+export default SignupScreen;

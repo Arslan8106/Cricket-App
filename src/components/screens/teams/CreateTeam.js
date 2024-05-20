@@ -15,7 +15,7 @@ import styles from "../../assets/styles/CreateTeamStyle";
 import Header from "../../shared/Header";
 import Toast from "react-native-toast-message";
 import {loginFailure, loginSuccess} from "../../../redux/action";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import _ from "lodash";
 import colors from "../../assets/colors/colors";
 import Players from "./Players";
@@ -23,7 +23,8 @@ import CreatePlayers from "./CreatePlayers";
 
 
 const CreateTeam = (props) => {
-    const captain = props.user["user"]["user"]["user"]["username"]
+    const useName = useSelector(state => state.user);
+    const captain = useName["username"]
     const [teamName, setTeamName] = useState('')
     const [captainName, setCaptainName] = useState(captain)
     const [team, setTeam] = useState('')
@@ -38,7 +39,7 @@ const CreateTeam = (props) => {
     }, []);
 
     const fetchTeam = () => {
-        axios.post(`${API_BASE_URL}/fetch_team`, props.user["user"]).then(response => {
+        axios.post(`${API_BASE_URL}/fetch_team`, useName).then(response => {
             console.log('Data', response.data);
             setTeam(response.data.team)
             setPlayers(response.data.players)
@@ -51,7 +52,7 @@ const CreateTeam = (props) => {
     }
     const handleSave = () => {
         axios.post(`${API_BASE_URL}/teams`,
-            {team: {name: teamName, captain: captainName, user: props.user["user"]}})
+            {team: {name: teamName, captain: captainName, user: useName}})
             .then(response => {
                 Toast.show({type: "success", text1: "Team created Successfully"})
                 setCaptainName('');

@@ -16,7 +16,7 @@ import CreateMatchModal from "../../modal/CreateMatchModal";
 import UpcomingMatchesBanner from "../../cards/UpcomingMatchesBanner";
 import axios from "axios";
 import Toast from "react-native-toast-message";
-import {connect} from "react-redux";
+import { useSelector} from "react-redux";
 
 const MatchesScreen = (props) => {
     const [createMatchModalVisible, setCreateMatchModalVisible] = useState(false)
@@ -26,7 +26,9 @@ const MatchesScreen = (props) => {
     const [matchesData, setMatchesData] = useState('')
     const [refreshing, setRefreshing] = useState(false);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
-    const user = props.user["user"]["user"]["user"]["role"] === "admin"
+    const Check = useSelector(state => state.user);
+    const user = Check["role"] === "admin"
+
 
     const handlePress = () => {
         setCreateMatchModalVisible(true)
@@ -110,11 +112,4 @@ const MatchesScreen = (props) => {
         </SafeAreaView>
     )
 }
-const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.isAuthenticated,
-        user: state.user,
-    };
-};
-
-export default connect(mapStateToProps)(MatchesScreen);
+export default MatchesScreen;

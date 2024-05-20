@@ -10,7 +10,7 @@ import {
     TextInput
 } from "react-native";
 import {logout} from "../../../redux/action";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import Header from "../../shared/Header";
 import colors from "../../assets/colors/colors";
 import matchesData from "../../assets/data/matchesData";
@@ -26,19 +26,13 @@ const HomeScreen = (props) => {
     const [isPressed, setIsPressed] = useState(false);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
     const [completedMatchesData , setCompletedMatchesData] = useState(null)
-    const [teamOneData , setTeamOneData] = useState(null)
-    const [teamTwoData , setTeamTwoData] = useState(null)
-    const [teamOneStats , setTeamOneStats] = useState(null)
-    const [teamTwoStats , setTeamTwoStats] = useState(null)
-    const user = props.user["user"]["user"]["user"]["role"] === "admin"
+
+    const Check = useSelector(state => state.user);
+    const user = Check["role"] === "admin"
     const loadCompletedMatches = () => {
         axios.get(`${API_BASE_URL}/matches`)
             .then(response => {
                 setCompletedMatchesData(response.data.completed_matches)
-                setTeamOneData(response.data.team1)
-                setTeamTwoData(response.data.team2)
-                setTeamOneStats(response.data.teamOneStats)
-                setTeamTwoStats(response.data.teamTwoStats)
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message

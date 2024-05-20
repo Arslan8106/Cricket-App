@@ -14,7 +14,7 @@ import {
 import styles from "../../assets/styles/CreateTeamStyle";
 import Header from "../../shared/Header";
 import {loginFailure, loginSuccess} from "../../../redux/action";
-import {connect} from "react-redux";
+import {connect, useSelector} from "react-redux";
 import Toast from "react-native-toast-message";
 import colors from "../../assets/colors/colors";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -24,6 +24,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 const CreatePlayers = (props) => {
     const [players, setPlayers] = useState([{name: '', age: '', email: '', player_type: '', batting_style: ''}]);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
+    const user = useSelector(state => state.user);
 
     const handleChange = (index, field, value) => {
         const updatedPlayers = [...players];
@@ -48,7 +49,7 @@ const CreatePlayers = (props) => {
     };
 
     const handleSave = () => {
-        axios.post(`${API_BASE_URL}/create_players`, {players: players, user: props.user["user"]})
+        axios.post(`${API_BASE_URL}/create_players`, {players: players, user: user})
             .then(response => {
                 Toast.show({type: "success", text1: "Players added Successfully"})
                 setPlayers([''])
@@ -171,14 +172,5 @@ const CreatePlayers = (props) => {
         </SafeAreaView>
     );
 };
-const mapStateToProps = (state) => {
-    return {
-        isAuthenticated: state.isAuthenticated,
-        user: state.user,
-    };
-};
-const mapDispatchToProps = {
-    loginSuccess,
-    loginFailure
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePlayers);
+
+export default CreatePlayers;

@@ -32,6 +32,7 @@ const CreateMatchModal = (props) => {
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
     const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+    const [showWarning, setShowWarning] = useState(false);
     const [modalHeight, setModalHeight] = useState(610);
     const API_BASE_URL = "http://10.0.2.2:3000/api/v1";
 
@@ -122,6 +123,15 @@ const CreateMatchModal = (props) => {
     const closeModal = () => {
         props.setCreateMatchModalVisible(false);
     };
+    const handleOversChange = (value) => {
+        if (parseInt(value) > 15) {
+            setShowWarning(true);
+            setOvers('');
+        } else {
+            setShowWarning(false);
+            setOvers(value);
+        }
+    };
 
     return (
         <View style={styles.centeredView}>
@@ -161,12 +171,13 @@ const CreateMatchModal = (props) => {
                                             value={venue}
                                             onChangeText={(venue) => setVenue(venue)}
                                         />
+                                        {showWarning && <Text style={styles.warningText}>Overs should not exceed 15</Text>}
                                         <TextInput
-                                            style={styles.input}
+                                            style={[styles.input, showWarning && styles.highlightedInput]}
                                             placeholder="Enter Overs"
                                             value={overs}
                                             keyboardType='numeric'
-                                            onChangeText={(overs) => setOvers(overs)}
+                                            onChangeText={handleOversChange}
                                         />
                                         <View
                                             style={{

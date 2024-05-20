@@ -32,6 +32,18 @@ export default StyleSheet.create({
         paddingHorizontal: 10,
         marginVertical: "3%"
     },
+    highlightedInput: {
+        borderColor: 'red',
+    },
+    warningText: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        backgroundColor: 'yellow',
+        padding: 5,
+    },
     lunchDinnerStyleText: {
         paddingHorizontal: "1%",
         paddingVertical: "2%",
