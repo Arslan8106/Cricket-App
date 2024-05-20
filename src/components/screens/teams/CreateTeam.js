@@ -40,7 +40,6 @@ const CreateTeam = (props) => {
 
     const fetchTeam = () => {
         axios.post(`${API_BASE_URL}/fetch_team`, useName).then(response => {
-            console.log('Data', response.data);
             setTeam(response.data.team)
             setPlayers(response.data.players)
             setIsLoad(true)
@@ -59,7 +58,6 @@ const CreateTeam = (props) => {
                 setTeamName('');
                 setTeam(response.data.team)
                 setIsLoad(true)
-                console.log('Data saved successfully:', response.data.team);
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message
@@ -104,7 +102,6 @@ const CreateTeam = (props) => {
                             </TouchableOpacity>
                         </View>
                     )}
-                    {console.log("tttt",isNotLoad)}
                     {isLoad && isNotLoad && !_.isEmpty(team) && (
                         <>
                             <Text style={styles.mainHeading}>Your Team</Text>

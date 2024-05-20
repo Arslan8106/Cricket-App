@@ -4,7 +4,6 @@ import * as React from "react";
 
 const MatchInfoScreen = (props) => {
     const matchDetails = props.matchDetails
-         console.log("pppp",props.players)
         const fetchCurrentTime = (timestampString) => {
         const timestamp = new Date(timestampString);
         const hours = timestamp.getUTCHours();

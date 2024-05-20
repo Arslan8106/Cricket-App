@@ -43,7 +43,6 @@ const MessageModal = (props) => {
                 setEmail('');
                 setSubject('')
                 props.setIsPressed(false)
-                console.log('Data saved successfully:', response.data.team);
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message

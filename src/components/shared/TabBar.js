@@ -18,8 +18,6 @@ const TabBar = ({ navigation, route, user }) => {
   const Check = useSelector(state => state.user);
 
   const userCheck = Check["role"] === "admin"
-  console.log("user1111", userCheck);
-
   const getHeaderTitle = (route) => {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "HomeScreen";
     switch (routeName) {

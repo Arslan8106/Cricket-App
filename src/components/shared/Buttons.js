@@ -37,7 +37,12 @@ const Buttons = (props) => {
     const wideNoBallScoreUpdater = (runs, type) => {
         setScoreDetails({ runs, type });
         setExtraScoreModal(true);
+        props.setUndoWideNoBall(true);
+
     };
+    const undoFunction = () => {
+        props.setUndo(true)
+    }
 
     useEffect(() => {
         if (!_.isNull(selectScore) && extraScoreModal) {
@@ -113,7 +118,7 @@ const Buttons = (props) => {
                         <Text style={styles.runsText}>WKT</Text>
                     </View>
                 </Pressable>
-                <Pressable onPress={() => props.setUndo(true)}>
+                <Pressable onPress={() => undoFunction()}>
                     <View style={styles.runsButtonWrapper}>
                         <Text style={styles.runsText}>Undo</Text>
                     </View>

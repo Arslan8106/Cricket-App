@@ -33,7 +33,6 @@ const LoginScreen = (props) => {
                 navigation.navigate("HomeScreen", response.data);
                 Toast.show({ type: "success", text1: "Welcome" })
             }
-            console.log(response.data);
         }).catch(err => Toast.show({ type: "error", text1: (err.response && err.response.data.error) || err.message }));
     };
 

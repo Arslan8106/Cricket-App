@@ -55,7 +55,6 @@ const CreatePlayers = (props) => {
                 setPlayers([''])
             })
             .catch(error => {
-                console.error('Error saving data:', error);
             });
     };
     const data = [

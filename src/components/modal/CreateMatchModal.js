@@ -61,7 +61,6 @@ const CreateMatchModal = (props) => {
             .then(response => {
                 setFetchTeams(response.data.teams);
                 setIsLoad(true);
-                console.log('Data fetched successfully:', response.data.teams);
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message
@@ -89,7 +88,6 @@ const CreateMatchModal = (props) => {
                 setTeam1('')
                 setTeam2('')
                 props.setCreateMatchModalVisible(false);
-                console.log('Data saved successfully:', response.data.team);
             }).catch(err => Toast.show({
             type: "error",
             text1: (err.response && err.response.data.error) || err.message

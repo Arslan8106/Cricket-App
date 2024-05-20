@@ -47,8 +47,6 @@ const HomeScreen = (props) => {
     const handlePress = () => {
         props.navigation.navigate("CreateTeam")
     };
-    console.log()
-
 
     return (
         <SafeAreaView style={styles.container}>

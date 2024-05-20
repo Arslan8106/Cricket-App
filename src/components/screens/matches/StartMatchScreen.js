@@ -58,6 +58,7 @@ const StartMatchScreen = (props) => {
     const [oversScore, setOversScore] = useState([]);
     const [balls, setBalls] = useState(0);
     const [wideNoBall, setWideNoBall] = useState(false);
+    const [undoWideNoBall, setUndoWideNoBall] = useState(false);
     const [partnership, setPartnership] = useState(0);
     const [partnershipScore, setPartnershipScore] = useState(0);
     const [isVisible, setIsVisible] = useState(false);
@@ -166,8 +167,6 @@ const StartMatchScreen = (props) => {
     useEffect(() => {
         setWideNoBall(false)
         setPartnership(teamScore - partnershipScore)
-        if (teamScore >= 0 && !wideNoBall && startScore) {
-            setBalls(balls => balls + 1);
             if (balls === 5) {
                 setOvers(overs => overs + 1);
                 setBalls(0);
@@ -181,13 +180,15 @@ const StartMatchScreen = (props) => {
                     setChangeNonStriker(false)
                 }
             }
-        }
     }, [teamScore, strikerBalls, nonStrikerBalls, wickets]);
 
     useEffect(() => {
         if (undoScore > 0) {
             removeLastBall()
+            if (!undoWideNoBall && undo)
+            {
             setBalls(balls => balls - 1);
+            }
             if ((undoScore === 1 || undoScore === 3) && (changeStriker && !changeNonStriker)) {
                 setTeamScore(teamScore - undoScore);
                 setNonStrikerScore(nonStrikerScore - undoScore);
@@ -217,6 +218,7 @@ const StartMatchScreen = (props) => {
         setUndo(false);
         setNotUndo(false);
         setUndoScore(0)
+        setUndoWideNoBall(false)
     }, [undo]);
     useEffect(() => {
         if (overs === matchOvers || wickets === 10 || (teamScore > firstInningsScore && (firstInningsScore > 0))) {
@@ -320,20 +322,24 @@ const StartMatchScreen = (props) => {
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
+            setBalls(balls => balls + 1);
             setChangeStriker(false);
             setChangeNonStriker(true);
         } else if ((score === 1 || score === 3) && (changeNonStriker && !changeStriker)) {
+            setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setNonStrikerScore(nonStrikerScore + score);
             setNonStrikerBalls(nonStrikerBalls + 1);
             setChangeStriker(true);
             setChangeNonStriker(false);
         } else if ((score !== 1 || score !== 3) && (changeStriker && !changeNonStriker)) {
+            setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setStrikerScore(strikerScore + score);
             setStrikerBalls(strikerBalls + 1);
             setChangeStriker(true);
         } else if ((score !== 1 || score !== 3) && (changeNonStriker && !changeStriker)) {
+            setBalls(balls => balls + 1);
             setTeamScore(teamScore + score);
             setNonStrikerScore(nonStrikerScore + score);
             setNonStrikerBalls(nonStrikerBalls + 1);
@@ -507,7 +513,7 @@ const StartMatchScreen = (props) => {
                      changeStriker={changeStriker} changeNonStriker={changeNonStriker} setUndo={setUndo}
                      undoScore={undoScore} setUndoScore={setUndoScore} setStartScore={setStartScore}
                      setNewPlayer={setNewPlayer} newPlayer={newPlayer} players={players}
-                     startSecondInnings={startSecondInnings}
+                     startSecondInnings={startSecondInnings} setUndoWideNoBall={setUndoWideNoBall}
                      setStrikerBatsman={setStrikerBatsman} setNonStrikerBatsman={setNonStrikerBatsman}/>
             {changeBowler && !finishFirstInnings &&
                 <ChangeBowlerModal bowlingTeamPlayers={bowlingTeamPlayers} setBowler={setBowler}
