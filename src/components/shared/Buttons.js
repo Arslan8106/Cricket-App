@@ -11,7 +11,7 @@ const Buttons = (props) => {
     // const [byesScoreModal, setByesScoreModal] = useState(false);
     const [selectScore, setSelectScore] = useState(null);
     // const [selectByesScore, setByesSelectScore] = useState(null);
-    // const [scoreDetails, setScoreDetails] = useState({ runs: 0, type: "" });
+    const [scoreDetails, setScoreDetails] = useState({ runs: 0, type: "" });
     // const [scoreByesDetails, setScoreByesDetails] = useState({ runs: 0, type: "" });
 
     const changeStrike = (runs) => {

@@ -133,7 +133,7 @@ const StartMatchScreen = (props) => {
     const wicketsUpdater = () => {
         setWickets(wickets + 1)
         setBowlerWicket(bowlerWicket + 1)
-        // setBalls(balls => balls + 1);
+        setBalls(balls => balls + 1);
         setPartnership(0)
         setPartnershipScore(teamScore)
         addOver("W");
@@ -144,7 +144,7 @@ const StartMatchScreen = (props) => {
             setNonStrikerScore(0);
             setNonStrikerBalls(0);
         }
-        if (balls === 5) {
+        if (balls === 6) {
             setOvers(overs => overs + 1);
             setBalls(0);
         }
@@ -180,7 +180,7 @@ const StartMatchScreen = (props) => {
         setWideNoBall(false)
         // setByesScore(false);
         setPartnership(teamScore - partnershipScore)
-            if (balls === 5) {
+        if (balls === 6) {
                 setOvers(overs => overs + 1);
                 setBalls(0);
                 setChangeBowler(true);
@@ -412,7 +412,7 @@ const StartMatchScreen = (props) => {
                 <Text style={styles.teamScoreHeading}>{teamScore} - {wickets} ({overs}.{balls})</Text>
                 {!finishFirstInnings ?
                     <Text style={styles.teamNewsHeading}>{batting} opt to bat</Text>
-                    : <Text style={styles.teamNewsHeading}>{batting} needs {firstInningsScore - teamScore} runs to
+                    : <Text style={styles.teamNewsHeading}>{batting} needs {(firstInningsScore - teamScore)+1} runs to
                         win</Text>
                 }
             </View>
